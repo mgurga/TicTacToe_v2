@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,14 +49,43 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         ((Button) view).setTextColor(getResources().getColor(R.color.black));
 
         if (checkForWin()) {
-
+            Log.d("TTT", "someone won");
         } else {
-            updateBoard();
+            int[][] board = boardToInt();
+
         }
     }
 
     private void updateBoard() {
 
+    }
+
+    private void printBoardInt(int[][] board) {
+        for(int i = 0; i < 3; i++) {
+            String line = "";
+            for(int j = 0; j < 3; j++) {
+                line += board[i][j] + " ";
+            }
+            Log.d("TTT", line);
+        }
+    }
+
+    private int[][] boardToInt() {
+        int[][] out = new int[3][3];
+
+        for(int i = 0; i < buttons.length; i++) {
+            for(int j = 0; j < buttons[i].length; j++) {
+                if (buttons[i][j].getText().equals("X")) {
+                    out[i][j] = 1;
+                } else if(buttons[i][j].getText().equals("O")) {
+                    out[i][j] = 2;
+                } else {
+                    out[i][j] = 0;
+                }
+            }
+        }
+
+        return out;
     }
 
     private boolean checkForWin() {

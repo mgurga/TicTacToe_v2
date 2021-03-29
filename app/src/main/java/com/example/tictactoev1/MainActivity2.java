@@ -10,14 +10,16 @@ import android.widget.TextView;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    SeekBar diffbar = findViewById(R.id.diffseekbar);
-    TextView diffname = findViewById(R.id.diffname);
+    SeekBar diffbar;
+    TextView diffname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        diffbar = findViewById(R.id.diffseekbar);
+        diffname = findViewById(R.id.diffname);
 
         diffbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
