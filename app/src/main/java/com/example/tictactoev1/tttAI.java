@@ -53,7 +53,13 @@ public class tttAI {
             }
         }
 
-        return possiblemoves.get(rand.nextInt(possiblemoves.size()));
+        int[] out = new int[] {1, 1};
+
+        while(board[out[0]][out[1]] != 0) {
+            out = possiblemoves.get(rand.nextInt(possiblemoves.size()));
+        }
+
+        return out;
     }
 
     public int[] lookForWin(int[][] board) {

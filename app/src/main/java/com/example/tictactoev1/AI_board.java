@@ -16,6 +16,12 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
     private tttAI AI = null;
     int xWins, yWins = 0;
     TextView xScore, yScore;
+    boolean latestMovePlayer = true;
+
+    // BOARD PIECES
+    // Nothing = 0
+    // X = 1
+    // O = 2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +31,7 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         Intent intent = getIntent();
         int diff = intent.getIntExtra("difficulty", 1);
 
-        AI = new tttAI(diff, 1);
+        AI = new tttAI(diff, 2);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -33,6 +39,7 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 buttons[i][j] = findViewById(resID);
                 buttons[i][j].setOnClickListener(this);
+                buttons[i][j].setText("");
             }
         }
 
@@ -47,17 +54,28 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
 
         ((Button) view).setText("X");
         ((Button) view).setTextColor(getResources().getColor(R.color.black));
+        latestMovePlayer = true;
 
+        if(checkForDraw())
+            gameDraw();
         if (checkForWin()) {
-            Log.d("TTT", "someone won");
+            Log.d("TTT", "USER won");
+            playerUSERWins();
         } else {
-            int[][] board = boardToInt();
+            // AI makes play
+            updateBoard(AI.makePlay(boardToInt()));
+            latestMovePlayer = false;
 
+            if(checkForDraw())
+                gameDraw();
+            if(checkForWin()) {
+                Log.d("TTT", "AI won");
+                playerAIWins();
+            }
         }
-    }
 
-    private void updateBoard() {
-
+        // make sure board colors are correct
+        updateBoard(boardToInt());
     }
 
     private void printBoardInt(int[][] board) {
@@ -67,6 +85,26 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
                 line += board[i][j] + " ";
             }
             Log.d("TTT", line);
+        }
+    }
+
+    private void updateBoard(int[][] board) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                switch (board[i][j]) {
+                    case 0:
+                        buttons[i][j].setText("");
+                        break;
+                    case 1:
+                        buttons[i][j].setText("X");
+                        buttons[i][j].setTextColor(getResources().getColor(R.color.black));
+                        break;
+                    case 2:
+                        buttons[i][j].setText("O");
+                        buttons[i][j].setTextColor(getResources().getColor(R.color.white));
+                        break;
+                }
+            }
         }
     }
 
@@ -122,7 +160,24 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         return false;
     }
 
-    private void playerOneWins() {
+    private boolean checkForDraw() {
+        int totalplacements = 0;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if(buttons[i][j].getText().equals("X") || buttons[i][j].getText().equals("O")) {
+                    totalplacements++;
+                }
+            }
+        }
+        
+        Log.d("TTT", "Board Placements: " + totalplacements);
+        //Log.d("TTT", (totalplacements == 8 ? true : false) + "");
+
+        return totalplacements == 8 ? true : false;
+    }
+
+    private void playerUSERWins() {
         // takes to screen where it says player one won
         Toast.makeText(AI_board.this, ("X wins!"), Toast.LENGTH_SHORT).show();
         xWins++;
@@ -130,11 +185,16 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         resetBoard();
     }
 
-    private void playerTwoWins() {
+    private void playerAIWins() {
         // takes to screen where it says player one won
         Toast.makeText(AI_board.this, ("O wins!"), Toast.LENGTH_SHORT).show();
         yWins++;
         yScore.setText(yWins + "");
+        resetBoard();
+    }
+
+    private void gameDraw() {
+        Toast.makeText(AI_board.this, ("Nobody wins!"), Toast.LENGTH_SHORT).show();
         resetBoard();
     }
 
