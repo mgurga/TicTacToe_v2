@@ -53,7 +53,6 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         }
 
         ((Button) view).setText("X");
-        ((Button) view).setTextColor(getResources().getColor(R.color.black));
         latestMovePlayer = true;
 
         if(checkForDraw())
@@ -170,9 +169,9 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
                 }
             }
         }
-        
-        Log.d("TTT", "Board Placements: " + totalplacements);
-        //Log.d("TTT", (totalplacements == 8 ? true : false) + "");
+
+        // Log.d("TTT", "Board Placements: " + totalplacements);
+        // Log.d("TTT", (totalplacements == 8 ? true : false) + "");
 
         return totalplacements == 8 ? true : false;
     }
