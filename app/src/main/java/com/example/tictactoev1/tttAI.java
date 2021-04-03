@@ -35,8 +35,8 @@ public class tttAI {
             play = randomMove(board);
 
             if(lookForWin(board)[0] != -1) {
-                Log.d("TTT", "playing winning move");
                 play = lookForWin(board);
+                Log.d("TTT", "playing winning move: " + play[0] + ", " + play[1]);
             }
         }
 
@@ -109,7 +109,7 @@ public class tttAI {
             out = new int[] {2, 2};
         }
 
-        diag = new int[] {board[0][2], board[1][1], board[0][2]};
+        diag = new int[] {board[0][2], board[1][1], board[2][0]};
         if(diag[1] == diag[2] && diag[2] == botpiece && diag[0] == 0) {
             out = new int[] {0, 2};
         }
@@ -117,10 +117,10 @@ public class tttAI {
             out = new int[] {1, 1};
         }
         if(diag[0] == diag[1] && diag[1] == botpiece && diag[2] == 0) {
-            out = new int[] {0, 2};
+            out = new int[] {2, 0};
         }
 
-        return new int[] {out[1], out[0]};
+        return new int[] {out[0], out[1]};
     }
 
 }
