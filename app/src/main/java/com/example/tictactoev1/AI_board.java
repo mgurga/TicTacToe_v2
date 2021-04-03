@@ -173,7 +173,7 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         // Log.d("TTT", "Board Placements: " + totalplacements);
         // Log.d("TTT", (totalplacements == 8 ? true : false) + "");
 
-        return totalplacements == 8 ? true : false;
+        return totalplacements == 9 && !checkForWin();
     }
 
     private void playerUSERWins() {
