@@ -1,5 +1,7 @@
 package com.example.tictactoev1;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -33,6 +35,7 @@ public class tttAI {
             play = randomMove(board);
 
             if(lookForWin(board)[0] != -1) {
+                Log.d("TTT", "playing winning move");
                 play = lookForWin(board);
             }
         }
@@ -66,39 +69,58 @@ public class tttAI {
 
         int[] out = new int[] {-1, -1};
 
+        // check vertical row for possible win
         for(int i = 0; i < 3; i++) {
             int[] row = board[i];
-
             if(row[1] == row[2] && row[2] == botpiece && row[0] == 0) {
                 out = new int[] {i, 0};
             }
-
             if(row[0] == row[1] && row[1] == botpiece && row[2] == 0) {
                 out = new int[] {i, 2};
             }
-
             if(row[0] == row[2] && row[2] == botpiece && row[1] == 0) {
                 out = new int[] {i, 1};
             }
         }
 
+        // check column for possible win
         for(int i = 0; i < 3; i++) {
-            int[] row = new int[] {board[i][0], board[i][1], board[i][2]};
-
-            if(row[1] == row[2] && row[2] == botpiece && row[0] == 0) {
+            int[] col = new int[] {board[0][i], board[1][i], board[2][i]};
+            if(col[1] == col[2] && col[2] == botpiece && col[0] == 0) {
                 out = new int[] {0, i};
             }
-
-            if(row[0] == row[2] && row[2] == botpiece && row[1] == 0) {
+            if(col[0] == col[2] && col[2] == botpiece && col[1] == 0) {
                 out = new int[] {1, i};
             }
-
-            if(row[0] == row[1] && row[1] == botpiece && row[2] == 0) {
+            if(col[0] == col[1] && col[1] == botpiece && col[2] == 0) {
                 out = new int[] {2, i};
             }
         }
 
-        return out;
+        //check diagonals
+        int[] diag = new int[] {board[0][0], board[1][1], board[2][2]};
+        if(diag[1] == diag[2] && diag[2] == botpiece && diag[0] == 0) {
+            out = new int[] {0, 0};
+        }
+        if(diag[0] == diag[2] && diag[2] == botpiece && diag[1] == 0) {
+            out = new int[] {1, 1};
+        }
+        if(diag[0] == diag[1] && diag[1] == botpiece && diag[2] == 0) {
+            out = new int[] {2, 2};
+        }
+
+        diag = new int[] {board[0][2], board[1][1], board[0][2]};
+        if(diag[1] == diag[2] && diag[2] == botpiece && diag[0] == 0) {
+            out = new int[] {0, 2};
+        }
+        if(diag[0] == diag[2] && diag[2] == botpiece && diag[1] == 0) {
+            out = new int[] {1, 1};
+        }
+        if(diag[0] == diag[1] && diag[1] == botpiece && diag[2] == 0) {
+            out = new int[] {0, 2};
+        }
+
+        return new int[] {out[1], out[0]};
     }
 
 }
