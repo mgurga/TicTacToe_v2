@@ -43,19 +43,27 @@ public class tttAI {
         } else if(diff == 1) {
             play = randomMove(board);
 
-            if(lookForWin(board)[0] != -1) {
-                play = lookForWin(board);
-                Log.d("TTT", "playing winning move: " + play[0] + ", " + play[1]);
+            if(lookForWin(board, botpiece)[0] != -1) {
+                play = lookForWin(board, botpiece);
+                Log.d("TTT", "[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
             }
         } else if(diff == 2) {
             play = randomMove(board);
 
-            if(movenum <= 1) {
+            if(movenum == 0) {
                 play = goodStaringMove(board);
+                Log.d("TTT", "[" + movenum + "] playing starting move: " + play[0] + ", " + play[1]);
             } else {
-                if(lookForWin(board)[0] != -1) {
-                    play = lookForWin(board);
-                    Log.d("TTT", "playing winning move: " + play[0] + ", " + play[1]);
+                int userpiece = botpiece + 1;
+                if (userpiece == 3)
+                        userpiece = 1;
+                if(lookForWin(board, userpiece)[0] != -1) {
+                    play = lookForWin(board, userpiece);
+                    Log.d("TTT", "[" + movenum + "] stopping user win: " + play[0] + ", " + play[1]);
+                }
+                if(lookForWin(board, botpiece)[0] != -1) {
+                    play = lookForWin(board, botpiece);
+                    Log.d("TTT", "[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
                 }
             }
         }
@@ -86,20 +94,19 @@ public class tttAI {
         return out;
     }
 
-    public int[] lookForWin(int[][] board) {
-
+    public int[] lookForWin(int[][] board, int piece) {
         int[] out = new int[] {-1, -1};
 
         // check vertical row for possible win
         for(int i = 0; i < 3; i++) {
             int[] row = board[i];
-            if(row[1] == row[2] && row[2] == botpiece && row[0] == 0) {
+            if(row[1] == row[2] && row[2] == piece && row[0] == 0) {
                 out = new int[] {i, 0};
             }
-            if(row[0] == row[1] && row[1] == botpiece && row[2] == 0) {
+            if(row[0] == row[1] && row[1] == piece && row[2] == 0) {
                 out = new int[] {i, 2};
             }
-            if(row[0] == row[2] && row[2] == botpiece && row[1] == 0) {
+            if(row[0] == row[2] && row[2] == piece && row[1] == 0) {
                 out = new int[] {i, 1};
             }
         }
@@ -107,37 +114,37 @@ public class tttAI {
         // check column for possible win
         for(int i = 0; i < 3; i++) {
             int[] col = new int[] {board[0][i], board[1][i], board[2][i]};
-            if(col[1] == col[2] && col[2] == botpiece && col[0] == 0) {
+            if(col[1] == col[2] && col[2] == piece && col[0] == 0) {
                 out = new int[] {0, i};
             }
-            if(col[0] == col[2] && col[2] == botpiece && col[1] == 0) {
+            if(col[0] == col[2] && col[2] == piece && col[1] == 0) {
                 out = new int[] {1, i};
             }
-            if(col[0] == col[1] && col[1] == botpiece && col[2] == 0) {
+            if(col[0] == col[1] && col[1] == piece && col[2] == 0) {
                 out = new int[] {2, i};
             }
         }
 
         //check diagonals
         int[] diag = new int[] {board[0][0], board[1][1], board[2][2]};
-        if(diag[1] == diag[2] && diag[2] == botpiece && diag[0] == 0) {
+        if(diag[1] == diag[2] && diag[2] == piece && diag[0] == 0) {
             out = new int[] {0, 0};
         }
-        if(diag[0] == diag[2] && diag[2] == botpiece && diag[1] == 0) {
+        if(diag[0] == diag[2] && diag[2] == piece && diag[1] == 0) {
             out = new int[] {1, 1};
         }
-        if(diag[0] == diag[1] && diag[1] == botpiece && diag[2] == 0) {
+        if(diag[0] == diag[1] && diag[1] == piece && diag[2] == 0) {
             out = new int[] {2, 2};
         }
 
         diag = new int[] {board[0][2], board[1][1], board[2][0]};
-        if(diag[1] == diag[2] && diag[2] == botpiece && diag[0] == 0) {
+        if(diag[1] == diag[2] && diag[2] == piece && diag[0] == 0) {
             out = new int[] {0, 2};
         }
-        if(diag[0] == diag[2] && diag[2] == botpiece && diag[1] == 0) {
+        if(diag[0] == diag[2] && diag[2] == piece && diag[1] == 0) {
             out = new int[] {1, 1};
         }
-        if(diag[0] == diag[1] && diag[1] == botpiece && diag[2] == 0) {
+        if(diag[0] == diag[1] && diag[1] == piece && diag[2] == 0) {
             out = new int[] {2, 0};
         }
 
