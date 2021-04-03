@@ -203,5 +203,6 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
                 buttons[i][j].setText("");
             }
         }
+        AI.setMovenum(0);
     }
 }

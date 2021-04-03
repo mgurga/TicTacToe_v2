@@ -7,15 +7,24 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class tttAI {
-    int diff = 0;
+    private int diff = 0;
     // 0 = easy
+    //      - random moves
     // 1 = medium
+    //      - takes winning plays when available
+    //      - random moves
     // 2 = hard
+    //      - takes strategic moves in the beginning of the game
+    //      - stops user from winning
+    //      - takes winning plays when available
+    //      - random moves
 
-    int botpiece = 0;
+    private int botpiece = 0;
     // 0 = nothing
     // 1 = opposing player (could switch)
     // 2 = AI (could switch)
+
+    private int movenum = 0;
 
     Random rand = new Random();
 
@@ -38,9 +47,21 @@ public class tttAI {
                 play = lookForWin(board);
                 Log.d("TTT", "playing winning move: " + play[0] + ", " + play[1]);
             }
+        } else if(diff == 2) {
+            play = randomMove(board);
+
+            if(movenum <= 1) {
+                play = goodStaringMove(board);
+            } else {
+                if(lookForWin(board)[0] != -1) {
+                    play = lookForWin(board);
+                    Log.d("TTT", "playing winning move: " + play[0] + ", " + play[1]);
+                }
+            }
         }
 
         out[play[0]][play[1]] = botpiece;
+        movenum++;
 
         return out;
     }
@@ -123,4 +144,28 @@ public class tttAI {
         return new int[] {out[0], out[1]};
     }
 
+    public int[] goodStaringMove(int[][] board) {
+        ArrayList<int[]> goodMoves = new ArrayList<int[]>();
+        goodMoves.add(new int[] {0, 0});
+        goodMoves.add(new int[] {0, 2});
+        goodMoves.add(new int[] {1, 1});
+        goodMoves.add(new int[] {0, 2});
+        goodMoves.add(new int[] {2, 2});
+
+        int[] out = new int[] {1, 1};
+
+        while(board[out[0]][out[1]] != 0) {
+            out = goodMoves.get(rand.nextInt(goodMoves.size()));
+        }
+
+        return out;
+    }
+
+    public int getMovenum() {
+        return movenum;
+    }
+
+    public void setMovenum(int movenum) {
+        this.movenum = movenum;
+    }
 }
