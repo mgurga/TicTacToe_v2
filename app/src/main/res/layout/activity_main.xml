@@ -127,13 +127,12 @@
         android:layout_margin="40dp"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/y"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:inputType="textPersonName"
             android:text="O wins"
             android:textColor="#000000"
             android:textSize="30sp"
@@ -159,13 +158,12 @@
         android:layout_margin="40dp"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/editTextTextPersonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:inputType="textPersonName"
             android:text="X wins"
             android:textColor="#000000"
             android:textSize="30sp"
