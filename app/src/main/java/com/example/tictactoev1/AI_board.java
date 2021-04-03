@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -55,11 +56,11 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         ((Button) view).setText("X");
         latestMovePlayer = true;
 
-        if(checkForDraw())
-            gameDraw();
         if (checkForWin()) {
             Log.d("TTT", "USER won");
             playerUSERWins();
+        } else if (checkForDraw()) {
+            gameDraw();
         } else {
             // AI makes play
             updateBoard(AI.makePlay(boardToInt()));
@@ -198,11 +199,15 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void resetBoard() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                buttons[i][j].setText("");
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        buttons[i][j].setText("");
+                    }
+                }
+                AI.setMovenum(0);
             }
-        }
-        AI.setMovenum(0);
+        }, 2500);
     }
 }
