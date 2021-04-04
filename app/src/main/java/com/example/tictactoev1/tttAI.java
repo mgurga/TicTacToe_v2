@@ -45,25 +45,25 @@ public class tttAI {
 
             if(lookForWin(board, botpiece)[0] != -1) {
                 play = lookForWin(board, botpiece);
-                Log.d("TTT", "[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
+                System.out.println("[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
             }
         } else if(diff == 2) {
             play = randomMove(board);
 
             if(movenum == 0) {
                 play = goodStaringMove(board);
-                Log.d("TTT", "[" + movenum + "] playing starting move: " + play[0] + ", " + play[1]);
+                System.out.println("[" + movenum + "] playing starting move: " + play[0] + ", " + play[1]);
             } else {
                 int userpiece = botpiece + 1;
                 if (userpiece == 3)
                         userpiece = 1;
                 if(lookForWin(board, userpiece)[0] != -1) {
                     play = lookForWin(board, userpiece);
-                    Log.d("TTT", "[" + movenum + "] stopping user win: " + play[0] + ", " + play[1]);
+                    System.out.println("[" + movenum + "] stopping user win: " + play[0] + ", " + play[1]);
                 }
                 if(lookForWin(board, botpiece)[0] != -1) {
                     play = lookForWin(board, botpiece);
-                    Log.d("TTT", "[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
+                    System.out.println("[" + movenum + "] playing winning move: " + play[0] + ", " + play[1]);
                 }
             }
         }
@@ -94,7 +94,7 @@ public class tttAI {
         return out;
     }
 
-    public int[] lookForWin(int[][] board, int piece) {
+    private int[] lookForWin(int[][] board, int piece) {
         int[] out = new int[] {-1, -1};
 
         // check vertical row for possible win
@@ -151,7 +151,7 @@ public class tttAI {
         return new int[] {out[0], out[1]};
     }
 
-    public int[] goodStaringMove(int[][] board) {
+    private int[] goodStaringMove(int[][] board) {
         ArrayList<int[]> goodMoves = new ArrayList<int[]>();
         goodMoves.add(new int[] {0, 0});
         goodMoves.add(new int[] {0, 2});
@@ -159,9 +159,9 @@ public class tttAI {
         goodMoves.add(new int[] {0, 2});
         goodMoves.add(new int[] {2, 2});
 
-        int[] out = new int[] {1, 1};
+        int[] out = new int[] {-1, -1};
 
-        while(board[out[0]][out[1]] != 0) {
+        while(out[0] == -1 || board[out[0]][out[1]] != 0) {
             out = goodMoves.get(rand.nextInt(goodMoves.size()));
         }
 
