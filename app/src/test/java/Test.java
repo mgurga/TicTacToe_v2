@@ -241,4 +241,94 @@ public class Test {
                 testBoard[2][1] == 2);
     }
 
+    @org.junit.Test
+    public void playWinningMove1() {
+        // Bot plays as Os and "User" as Xs, medium difficulty
+        // Bot finds the winning move and returns it
+        tttAI AI = new tttAI(1, 2);
+
+        int[][] testBoard = new int[][] {
+                new int[] {1, 2, 1},
+                new int[] {2, 2, 1},
+                new int[] {1, 0, 2}
+        };
+
+        testBoard = AI.makePlay(testBoard);
+        AI.setMovenum(8);
+
+        assertEquals(testBoard[2][1], 2);
+    }
+
+    @org.junit.Test
+    public void playWinningMove2() {
+        // Bot plays as Os and "User" as Xs, medium difficulty
+        // Bot finds the winning move and returns it
+        tttAI AI = new tttAI(1, 2);
+
+        int[][] testBoard = new int[][] {
+                new int[] {0, 2, 2},
+                new int[] {0, 1, 0},
+                new int[] {0, 0, 1}
+        };
+
+        testBoard = AI.makePlay(testBoard);
+        AI.setMovenum(4);
+
+        assertEquals(testBoard[0][0], 2);
+    }
+
+    @org.junit.Test
+    public void playWinningMove3() {
+        // Bot plays as Os and "User" as Xs, medium difficulty
+        // Bot finds the winning move and returns it
+        tttAI AI = new tttAI(1, 2);
+
+        int[][] testBoard = new int[][] {
+                new int[] {2, 1, 0},
+                new int[] {0, 2, 1},
+                new int[] {0, 0, 0}
+        };
+
+        testBoard = AI.makePlay(testBoard);
+        AI.setMovenum(4);
+
+        assertEquals(testBoard[2][2], 2);
+    }
+
+    @org.junit.Test
+    public void playWinningMove4() {
+        // Bot plays as Os and "User" as Xs, medium difficulty
+        // Bot finds the winning move and returns it
+        tttAI AI = new tttAI(1, 2);
+
+        int[][] testBoard = new int[][] {
+                new int[] {2, 1, 0},
+                new int[] {2, 1, 1},
+                new int[] {0, 0, 0}
+        };
+
+        testBoard = AI.makePlay(testBoard);
+        AI.setMovenum(5);
+
+        assertEquals(testBoard[2][0], 2);
+    }
+
+    @org.junit.Test
+    public void playWinningMove5() {
+        // Bot plays as Os and "User" as Xs, medium difficulty
+        // Bot finds the winning move and returns it
+        tttAI AI = new tttAI(1, 2);
+
+        int[][] testBoard = new int[][] {
+                new int[] {0, 1, 0},
+                new int[] {1, 2, 1},
+                new int[] {2, 0, 0}
+        };
+
+        testBoard = AI.makePlay(testBoard);
+        AI.setMovenum(5);
+
+        assertEquals(testBoard[0][2], 2);
+    }
+
 }
