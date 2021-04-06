@@ -46,6 +46,25 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
 
         xScore = findViewById(R.id.xScore);
         yScore = findViewById(R.id.yScore);
+
+        ((TextView) findViewById(R.id.xwinslabel)).setText("X Wins (User):");
+        ((TextView) findViewById(R.id.owinslabel)).setText("O Wins (Bot):");
+
+        Button buttonReset = findViewById(R.id.button_reset);
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetGame();
+            }
+        });
+    }
+
+    private void resetGame() {
+        xWins = 0;
+        yWins = 0;
+        xScore.setText(xWins + "");
+        yScore.setText(yWins + "");
+        resetBoard();
     }
 
     public void onClick(View view) {
@@ -181,7 +200,7 @@ public class AI_board extends AppCompatActivity implements View.OnClickListener{
         // takes to screen where it says player one won
         Toast.makeText(AI_board.this, ("X wins!"), Toast.LENGTH_SHORT).show();
         xWins++;
-        xScore.setText(xWins +"");
+        xScore.setText(xWins + "");
         resetBoard();
     }
 
