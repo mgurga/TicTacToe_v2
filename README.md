@@ -1,17 +1,25 @@
-# Project Name: TicTacToe_v1
-Class: Advanced Java with Android Studio
+# Project Name: TicTacToe_v2
+Tic Tac Toe with a brilliant Bot to play against with three difficulty options as well as smaller bug fixes and quality of life changes. The Bot can be easily taken from this project to others because it uses no android APIs and uses pure Java. The project includes 21 tests for the Bot in many positions. Created by [mgurga](https://github.com/mgurga) and [thefluffyoshi](https://github.com/thefluffyoshi).
 
-People who worked on the project: thefluffyoshi, audy910, chewbacca615
+## Bot Difficulties
+The Bot can be set to 3 different difficulties with different strategies. All Bot logic is stored in [tttAI.java](https://github.com/mgurga/TicTacToe_v2/blob/master/app/src/main/java/com/example/tictactoev1/tttAI.java).
+#### Easy
+- Only makes random moves
 
-Submitted Nov 20 2020
+#### Medium
+- Makes random plays
+- Plays winning moves if available
 
-This was a project in Android Studio where my partners and I worked together to create a TicTacToeV1 game. It's a simple TicTacToe game. The app has the school colors incorporated throughout as it's theme.
+#### Hard
+- First move is always strategetic(one of the four corners or middle square)
+- Blocks the user from winning
+- Takes wins when available
+- Otherwise, only make random moves
 
-# Requirements
-- CLIENT CALL: the theme of the game had to have school colors or school mascot
-- there had to be a 3x3 grid
-- users had to be able to interact with the game
-- X or O appeared depending on player's turn
-- player turn has to be indicated
-- there is a win state and win notification
-- there is a replay option
+## Screenshots
+<img alt="homescreen" src="https://github.com/mgurga/TicTacToe_v2/blob/master/docs/homescreen.png" width="300px"> <img alt="game 1" src="https://github.com/mgurga/TicTacToe_v2/blob/master/docs/game1.png" width="300px"> <img alt="game 2" src="https://github.com/mgurga/TicTacToe_v2/blob/master/docs/game2.png" width="300px"> <img alt="game 3" src="https://github.com/mgurga/TicTacToe_v2/blob/master/docs/game3.png" width="300px"> <img alt="game 4" src="https://github.com/mgurga/TicTacToe_v2/blob/master/docs/game4.png" width="300px">
+
+## [Tic Tac Toe v1](https://github.com/thefluffyoshi/TicTacToe_v2) creators
+- thefluffyoshi
+- audy910
+- chewbacca615
