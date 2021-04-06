@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="AI Difficulty"
+        android:text="Bot Difficulty"
         android:textSize="20sp" />
 
     <SeekBar
@@ -62,7 +62,7 @@
         android:backgroundTint="@color/black"
         android:fontFamily="@font/eagle_lake"
         android:onClick="onVsAI"
-        android:text="VS AI" />
+        android:text="VS Bot" />
 
 </LinearLayout>
 
