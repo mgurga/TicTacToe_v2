@@ -1,4 +1,4 @@
-# Project Name: TicTacToe_v2
+# Tic Tac Toe v2
 Tic Tac Toe with a brilliant Bot to play against with three difficulty options as well as smaller bug fixes and quality of life changes. The Bot can be easily taken from this project to others because it uses no android APIs and uses pure Java. The project includes 21 tests for the Bot in many positions. Created by [mgurga](https://github.com/mgurga) and [thefluffyoshi](https://github.com/thefluffyoshi).
 
 ## Bot Difficulties
